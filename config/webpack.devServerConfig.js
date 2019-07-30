@@ -2,7 +2,7 @@
  * @Author: Carrey Wang
  * @Date:   2019-07-26 19:58:50
  * @Last Modified by:   Carrey Wang
- * @Last Modified time: 2019-07-27 20:37:59
+ * @Last Modified time: 2019-07-30 10:21:39
  */
 
 'use strict';
@@ -14,5 +14,7 @@ module.exports = {
     /*压缩是否开启*/
     compress: true,
     /*是否开启热更新*/
-    hot: true
+    hot: true,
+    /*自动打开浏览器*/
+    open: true
 }
