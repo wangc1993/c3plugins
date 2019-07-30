@@ -1,0 +1,42 @@
+@keyframes marquee {
+    from {
+        left: 100%;
+    }
+
+    to {
+        left: -100%;
+    }
+}
+.box{
+    display: flex;
+    .inner{
+        width: 200px;
+        height: 100px;
+        line-height: 100px;
+        font-size: 32px;
+        font-family: sans-serif;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        span{
+            position: absolute;
+            animation: marquee 5s linear infinite;
+        }
+        &:first-child{
+            background-color: indianred;
+            color: darkred;
+            transform-origin: left;
+            transform: perspective(300px) rotateY(-67.3deg);
+            span{
+                animation-delay: 2.5s;
+                left: -100%;
+            }
+        }
+        &:last-child{
+            background-color: lightcoral;
+            color: antiquewhite;
+            transform-origin: right;
+            transform: perspective(300px) rotateY(67.3deg);
+        }
+    }
+}

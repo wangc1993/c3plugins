@@ -1,0 +1,71 @@
+.turntable{
+    position: relative;
+    width: 800px;
+    margin: 0 auto;
+    .arrow{
+        position: absolute;
+        left: 300px;
+        width: 50px;
+        height: 100px;
+        z-index: 2;
+        border-radius: 0 50px 50px 0;
+        background-image: linear-gradient(120deg, #8758ff, #58dbff 25px, transparent 25px);
+        transform: rotate(-15deg);
+    }
+    .turntable-background{
+        position: relative;
+        top: 30px;
+        width: 300px;
+        height: 300px;
+        margin-left: 300px;
+        transform-origin: left center;
+        /* transition: transform 16s cubic-bezier(0,.47,.31,1.03); */
+        .piece {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 150px;
+            height: 300px;
+            border-radius: 0 150px 150px 0;
+            transform-origin: left center;
+            span {
+                display: inline-block;
+                padding: 12px;
+                padding-top: 20px;
+                height: 100px;
+                width: 40px;
+                text-align: center;
+                display: inline-block;
+                color: #fff;
+            }
+            &:nth-child(2n) {
+                background-image: linear-gradient(120deg, #f6d365, #f6d365 75px, transparent 75px);
+            }
+            &:nth-child(2n+1) {
+                background-image: linear-gradient(120deg, #ff5858, #ff5858 75px, transparent 75px);
+            }
+        }
+        .loop(@n) when (@n >= 0) {
+            .loop(@n - 1);
+            .piece-@{n} {
+                transform: rotate(-30deg * (@n + 1));
+            }
+        }
+        .loop(11)
+    }
+    #start{
+        position: absolute;
+        top: 350px;
+        left: 260px;
+        width: 80px;
+        height: 40px;
+        border-radius: 20px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background-image: linear-gradient(120deg, #8758ff 40%, #58dbff 75%, #589fff);
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

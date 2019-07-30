@@ -1,0 +1,38 @@
+.box {
+    width: 200px;
+    height: 60px;
+    border: 2px solid black;
+    text-align: center;
+    font-size: 30px;
+    line-height: 60px;
+    font-family: sans-serif;
+    overflow: hidden;
+    span{
+        display: inline-block;
+        color: red;
+        transition: 0.5s;
+        &:nth-child(odd) {
+            transform: translateY(100%);
+            &::before{
+                transform: translateY(-100%);
+            }
+        }
+        &:nth-child(even) {
+            transform: translateY(-100%);
+            &::before{
+                transform: translateY(100%);
+            }
+        }
+        &::before{
+            content: attr(data-text);
+            position: absolute;
+            color: blue;
+        }
+    }
+    &:hover{
+        cursor: pointer;
+        span{
+            transform: translateY(0);
+        }
+    }
+}
