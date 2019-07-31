@@ -14,7 +14,7 @@ module.exports = {
     mode: 'development',
     /*入口文件的配置项*/
     entry: {
-        app: './app',
+        index: './index.ts',
         turntable: './src/turntable/turntable.ts',
         textslide: './src/textslide/textslide.ts',
         flowborder: './src/flowborder/flowborder.ts',

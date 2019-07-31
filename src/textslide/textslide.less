@@ -24,6 +24,7 @@
             }
         }
         &::before{
+            /* 伪元素通过attr()获取标签自定义属性的值 */
             content: attr(data-text);
             position: absolute;
             color: blue;

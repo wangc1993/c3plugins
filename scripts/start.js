@@ -14,4 +14,4 @@ const compiler = webpack(config);
 
 const devServer = new WebpackDevServer(compiler, serverConfig);
 
-devServer.listen(3000, 'localhost');
+devServer.listen(3001, 'localhost');

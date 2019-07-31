@@ -8,7 +8,7 @@ import './turntable.less';
 
 /*转盘抽奖数据*/
 const wards : string[] = [
-    '1元', '2元', '3元', '5元', '再来一次','算法', '0.5元', '0.1元', '0.2元', '0.6元','0.5元', '谢谢'
+    '1元', '2元', '3元', '5元', '再来一次','再来一次', '0.5元', '0.1元', '0.2元', '0.6元','0.5元', '谢谢'
 ];
 /*生成从 start到end的随机数*/
 function randomArr(start: number, end: number) {
@@ -40,10 +40,14 @@ document.getElementById('start').addEventListener('click', function(){
         once = false;
         eleTurntable.setAttribute('style',`transform:rotate(${totalRadis}deg);transition: transform ${time}s cubic-bezier(0,.47,.31,1.03)`);
         setTimeout(function(){
-            once = true;
+            if(wards[n] === '再来一次'){
+                once = true;
+            }
             alert('恭喜你抽中了' + wards[n] + '!');
             /*返回原始状态*/
             eleTurntable.setAttribute('style',`transform:rotate(0deg);transition: none;`);
-        }, time * 1000)
+        }, time * 1000 + 500)
+    }else{
+        alert('不好意思，您已经抽过奖了！');
     }
     })

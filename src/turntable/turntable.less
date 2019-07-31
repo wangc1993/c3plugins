@@ -2,6 +2,7 @@
     position: relative;
     width: 800px;
     margin: 0 auto;
+    /* 箭头样式 */
     .arrow{
         position: absolute;
         left: 300px;
@@ -9,6 +10,7 @@
         height: 100px;
         z-index: 2;
         border-radius: 0 50px 50px 0;
+        /* linear-gradient(渐变的方向，渐变的颜色 当前颜色的开始位置) 渐变的颜色至少2种*/
         background-image: linear-gradient(120deg, #8758ff, #58dbff 25px, transparent 25px);
         transform: rotate(-15deg);
     }
@@ -18,8 +20,8 @@
         width: 300px;
         height: 300px;
         margin-left: 300px;
+        /* 定义视图的位置（默认是50% 50%） */
         transform-origin: left center;
-        /* transition: transform 16s cubic-bezier(0,.47,.31,1.03); */
         .piece {
             position: absolute;
             left: 0;
