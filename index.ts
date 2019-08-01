@@ -4,8 +4,13 @@
  * @Last Modified by:   Carrey Wang
  * @Last Modified time: 2019-07-27 19:59:35
  */
-import './src/common/common.less';
-import './index.less';
+import './src/common/common';
+import './index';
+import './src/common/message/message.less';
+import Message from './src/common/message/message.ts';
+
+import { LOADIPHLPAPI } from 'dns';
+/* 所有插件 */
 const PluginArr = [{
     plugin_title: 'turntable'
 },{
@@ -19,6 +24,8 @@ const PluginArr = [{
 },{
     plugin_title: 'batteryloading'
 }]; 
+/* 是否跳转的标志位 */
+let jumpBool : boolean = false;
 /* 避免transition属性在页面加载时就运行一次 */
 window.onload = function(){
     const inputDiv = document.getElementsByTagName('input')[0];
@@ -33,15 +40,6 @@ window.onload = function(){
     }
     pluginsDiv.innerHTML = pluginListHtml;
     const searchListDiv = document.getElementsByClassName('search-list')[0]; 
-    /* plugin_list对应搜索框下拉菜单 */
-    let plugin_list = [];
-    for (let i = 0; i < PluginArr.length; i++) {
-        let plugin_title = PluginArr[i].plugin_title;
-        let obj = {
-            'plugin_title': plugin_title
-        };
-        plugin_list.push(obj);
-    }
     /* 筛选符合搜索条件的插件 */
     let filteredList = [];
     /* 记录当前的hover索引 */
@@ -51,7 +49,7 @@ window.onload = function(){
     inputDiv.addEventListener('keydown', selectPlugin);
     inputDiv.addEventListener('blur', hidePluginList);
     function generatePluginList(event){
-        const userInput = event.target.value;
+        const userInput : string = event.target.value;
         const currentKey: number = event.keyCode;
         /* 符合条件的插件片段，插入文档中 */
         let fragment = document.createDocumentFragment();
@@ -66,7 +64,7 @@ window.onload = function(){
             /* 清空之前的下拉框 */
             searchListDiv.innerHTML = '';
             searchListDiv.classList.remove('hidden');
-            filteredList = plugin_list.filter(function (arr) {
+            filteredList = PluginArr.filter(function (arr) {
                 return arr.plugin_title.includes(userInput);
             });
             /* 判断是否有符合条件的插件 */
@@ -75,6 +73,7 @@ window.onload = function(){
                 paragraph.innerText = 'No app found';
                 fragment.appendChild(paragraph);
             }else{
+                /* 动态增加插件下拉框 */
                 for (let i = 0; i < filteredList.length; i++) {
                     let paragraph = document.createElement('p');
                     paragraph.classList.add('search-p');
@@ -92,12 +91,16 @@ window.onload = function(){
                     let span = document.createElement('span');
                     span.innerText = filteredList[i].plugin_title;
                     paragraph.appendChild(span);
+                    paragraph.addEventListener('click',function(){
+                        window.open( `http://localhost:3001/${filteredList[i].plugin_title}.html`);
+                    });
                     fragment.appendChild(paragraph);
                 }
             }
             searchListDiv.appendChild(fragment);
         }
     }
+    /* 通过键盘控制插件的选择 */
     function selectPlugin(event){
         const currentKey: number = event.keyCode;
         if(currentKey === 38){
@@ -131,14 +134,30 @@ window.onload = function(){
         }
         if(currentKey === 13){
             /* 回车搜索 */
-            window.open( `http://localhost:3001/${inputDiv.value}.html`);
+            PluginArr.filter((item,index) => {
+                if(item.plugin_title === inputDiv.value){
+                    jumpBool = true;
+                    window.open( `http://localhost:3001/${inputDiv.value}.html`);
+                }else{
+                    if(index === PluginArr.length - 1 && !jumpBool){
+                        let message = new Message({
+                            message:`<div>不存在插件${inputDiv.value}，请重新输入！</div>`,
+                            type:"info"
+                        });
+                        message.showModel();
+                    }
+                }
+            });
+            /* 重新赋值 */
+            jumpBool = false;
         }
-        
     }
     function hidePluginList(){
-        /* 清理输入框与隐藏下拉框 */
-        inputDiv.value = '';
-        searchListDiv.classList.add('hidden');
+        /* 清理输入框与隐藏下拉框，定时器是为了让清除操作在页面跳转之后*/
+        setTimeout(function(){
+            inputDiv.value = '';
+            searchListDiv.classList.add('hidden');
+        },100);
     }
     /* 清除元素指定类 */
     function removeClass(){

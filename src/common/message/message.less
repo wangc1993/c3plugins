@@ -1,0 +1,56 @@
+.message{
+    position: fixed;
+    right: -8%;
+    bottom: 0;
+    z-index: 10;
+    transition: all 0.3s;
+    transform: translate(-50%, -50%) scale(0, 0);
+    background: #fff;
+    box-shadow: 0 0 10px #eee;
+    font-size: 12px;
+    padding: 10px;
+    display: flex;
+    border-radius: 4px;
+    .message-icon{
+        width: 80px;
+        div{
+            width: 45px;
+            height: 45px;
+            margin: 0 auto;
+            line-height: 45px;
+            color: #fff;
+            border-radius: 50% 50%;
+            font-size: 2em;
+        }
+        .message-icon-success{
+            background: #32a323;
+            text-align: center;
+            &::after{
+                content: "√";
+            }
+        }
+        .message-icon-warning{
+            background: #ff8080;
+            text-align: center;
+            &::after{
+                content: "×";
+            }
+        }
+        .message-icon-info{
+            background: #80b7ff;
+            text-align: center;
+            &::after{
+                content: "info";
+            }
+        }
+    }
+    .message-content{
+        min-width: 200px;
+        font-size: 1.5em;
+        word-break: break-all;
+        display: flex;
+        align-items: center;
+        padding-left: 10px;
+        box-sizing: border-box;
+    }
+}

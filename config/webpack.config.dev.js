@@ -47,6 +47,10 @@ module.exports = {
             }
         }]
     },
+    resolve: {
+        /* 按顺序自动补全后缀名 */
+        extensions: ['.less','.ts','.js']
+    },
     /*配置webpack服务器*/
     devServer: DevServerConfig
 }
