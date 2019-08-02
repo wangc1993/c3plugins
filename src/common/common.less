@@ -10,3 +10,21 @@ html, body {
     justify-content: center;
     flex-direction: column;
 }
+.generate-columns(4);
+.generate-columns(@n, @i: 1) when (@i =< @n) {
+    .multiLine-ellipse-@{i} {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        word-wrap: break-word;
+        word-spacing: normal;
+        word-break: break-all;
+        width: 100%;
+        white-space: normal;
+        /* autoprefixer: off */
+        -webkit-box-orient: vertical;
+        display: block;
+        display: -webkit-box;
+        -webkit-line-clamp: @i;
+    }
+    .generate-columns(@n, (@i + 1));
+}

@@ -8,8 +8,8 @@ import './src/common/common';
 import './index';
 import './src/common/message/message.less';
 import Message from './src/common/message/message.ts';
-
-import { LOADIPHLPAPI } from 'dns';
+import './src/common/pagination/pagination.less';
+import Pagination from './src/common/pagination/pagination.ts';
 /* 所有插件 */
 const PluginArr = [{
     plugin_title: 'turntable'
@@ -32,13 +32,9 @@ window.onload = function(){
     inputDiv.setAttribute('style','transition: all 0.8s;');
     const searchDiv = document.getElementsByClassName('search')[0];
     searchDiv.setAttribute('style','transition: all 0.8s;');
-    /* 动态生成列表 */
+    /* 动态生成插件列表 */
     const pluginsDiv = document.getElementsByClassName('plugins')[0];
-    let pluginListHtml = '';
-    for(let i=0;i<PluginArr.length;i++){
-        pluginListHtml += `<div class="plugin"><a href="http://localhost:3001/${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>`;
-    }
-    pluginsDiv.innerHTML = pluginListHtml;
+    addPluginList();
     const searchListDiv = document.getElementsByClassName('search-list')[0]; 
     /* 筛选符合搜索条件的插件 */
     let filteredList = [];
@@ -169,4 +165,20 @@ window.onload = function(){
     function selectToInput(){
         inputDiv.value = searchListDiv.children[currentIndex].firstChild.textContent;
     }
+    /* 动态生成插件列表 */
+    function addPluginList(pageNumber = 1,perPageCount = 8){
+        let pluginListHtml = '';
+        for(let i=(pageNumber - 1) * perPageCount;i<PluginArr.length;i++){
+            pluginListHtml += `<div class="plugin"><a class="multiLine-ellipse-1" href="http://localhost:3001/${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>`;
+        }
+        pluginsDiv.innerHTML = pluginListHtml;
+    }
+    let pagination = new Pagination({
+        totalCount: 100,
+        container: '.pagination-div',
+        onPageChange: function(data){
+            console.log(data.pageNumber);
+            addPluginList(data.pageNumber);
+        }
+    });
 };
