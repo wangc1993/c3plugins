@@ -1,12 +1,16 @@
+import '../message/message.less';
+import Message from '../message/message.ts';
+/*每页显示多少插件*/
+const pageArr = [8,12,16,20];
 export default class Pagination {
     state: any;
     constructor(options) {
         if (!options.totalCount || !options.container) return;
         this.state = {
             pageNumber: options.pageNumber || 1,//当前页
-            perPageCount: options.perPageCount || 8,//每页显示的数量
+            perPageCount: options.perPageCount || pageArr[2],//每页显示的数量
             totalCount: options.totalCount, //总共多少条Item（必须）
-            totalPageCount: Math.ceil(options.totalCount / (options.perPageCount || 8)),//总共多少页 
+            totalPageCount: Math.ceil(options.totalCount / (options.perPageCount || pageArr[2])),//总共多少页
             onPageChange: options.onPageChange || null,
             onPerPageChange: options.onPerPageChange || null,
             container: options.container || 'body',
@@ -22,7 +26,16 @@ export default class Pagination {
         state.totalPageCount > state.maxShowBtnCount + 2 && (state.activePosition = Math.ceil(state.maxShowBtnCount / 2));
         /* 渲染DOM */
         let pageContainer = this.selectorEle(state.container);
+        /*左边的每页大小切换*/
+        console.log(state.perPageCount)
+
         let paginationHTML = `
+        <select class="pageSelect">
+            ${pageArr.map((number,index)=>
+                `<option value=${number} ${number === state.perPageCount ? 'selected' : ''}>${number}</option>`)}
+        </select>`;
+        /*增加中间的分页*/
+        paginationHTML += `
         <ul class="pagination">
         <li class="page-li page-prev no-prev">上一页</li>
         <li class="page-li page-number page-active" data-number='1'>1</li>
@@ -46,6 +59,7 @@ export default class Pagination {
             }
         }
         paginationHTML += `<li class="page-li page-next ${state.totalPageCount === 1 ? ' ' + 'no-next' : ''}">下一页</li></ul>`;
+        paginationHTML += `<div class="goto"><span>跳至</span><input type="number" class="jumpInput" min=1 max=${state.totalPageCount} /><span>页</span><div>`;
         pageContainer.innerHTML = paginationHTML;
         this.bindEvent();
     }
@@ -72,6 +86,28 @@ export default class Pagination {
                 pageNumber && this.gotoPage(pageNumber);
             })
         })
+        let jumpInput = this.selectorEle('.jumpInput');
+        jumpInput.addEventListener('keydown', (e) =>{
+            const currentKey: number = e.keyCode;
+            if(currentKey === 13){
+                pageNumber = +e.target.value;
+                /*判断页码是否超出范围*/
+                if(pageNumber > state.totalPageCount){
+                    let message = new Message({
+                            message:`<div>页码超出范围啦，请重新输入！</div>`,
+                            type:"warning"
+                        });
+                        message.showModel();
+                }else{
+                    this.gotoPage(pageNumber);
+                }
+            }
+        });
+        let pageSelect = this.selectorEle('.pageSelect');
+        pageSelect.addEventListener('change', (e) => {
+            state.perPageCount = +e.target.value;
+            this.gotoPage(1);
+        });
     }
     gotoPage(pageNumber) {
         let state = this.state;
@@ -165,7 +201,7 @@ export default class Pagination {
     isIllegal(pageNumber) {
         let state = this.state;
         return (
-            state.pageNumber === pageNumber || Math.ceil(pageNumber) !== pageNumber ||
+            Math.ceil(pageNumber) !== pageNumber ||
             pageNumber > state.totalPageCount || pageNumber < 1 ||
             typeof pageNumber !== 'number' || pageNumber !== pageNumber
         )

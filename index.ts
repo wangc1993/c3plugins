@@ -23,7 +23,10 @@ const PluginArr = [{
     plugin_title: 'glossybutton'
 },{
     plugin_title: 'batteryloading'
-}]; 
+}];
+for(let i=0;i<200;i++){
+    PluginArr.push({plugin_title:`flow${i}`})
+}
 /* 是否跳转的标志位 */
 let jumpBool : boolean = false;
 /* 避免transition属性在页面加载时就运行一次 */
@@ -34,8 +37,10 @@ window.onload = function(){
     searchDiv.setAttribute('style','transition: all 0.8s;');
     /* 动态生成插件列表 */
     const pluginsDiv = document.getElementsByClassName('plugins')[0];
+    /*每页多少个插件*/
+    const perPageCount = 16;
     addPluginList();
-    const searchListDiv = document.getElementsByClassName('search-list')[0]; 
+    const searchListDiv = document.getElementsByClassName('search-list')[0];
     /* 筛选符合搜索条件的插件 */
     let filteredList = [];
     /* 记录当前的hover索引 */
@@ -166,19 +171,21 @@ window.onload = function(){
         inputDiv.value = searchListDiv.children[currentIndex].firstChild.textContent;
     }
     /* 动态生成插件列表 */
-    function addPluginList(pageNumber = 1,perPageCount = 8){
+    function addPluginList(pageNumber = 1,perpageCount = perPageCount){
+        console.log(perpageCount)
+
         let pluginListHtml = '';
-        for(let i=(pageNumber - 1) * perPageCount;i<PluginArr.length;i++){
-            pluginListHtml += `<div class="plugin"><a class="multiLine-ellipse-1" href="http://localhost:3001/${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>`;
+        for(let i=(pageNumber - 1) * perpageCount;i<(pageNumber * perpageCount);i++){
+            pluginListHtml += PluginArr[i] ? `<div class="plugin"><a class="multiLine-ellipse-1" href="http://localhost:3001/${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>` : '';
         }
         pluginsDiv.innerHTML = pluginListHtml;
     }
     let pagination = new Pagination({
-        totalCount: 100,
+        totalCount: PluginArr.length,
         container: '.pagination-div',
+        perPageCount,
         onPageChange: function(data){
-            console.log(data.pageNumber);
-            addPluginList(data.pageNumber);
+            addPluginList(data.pageNumber,data.perPageCount);
         }
     });
 };
