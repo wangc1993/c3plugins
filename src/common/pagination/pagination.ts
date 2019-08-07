@@ -27,8 +27,6 @@ export default class Pagination {
         /* 渲染DOM */
         let pageContainer = this.selectorEle(state.container);
         /*左边的每页大小切换*/
-        console.log(state.perPageCount)
-
         let paginationHTML = `
         <select class="pageSelect">
             ${pageArr.map((number,index)=>

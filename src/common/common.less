@@ -10,6 +10,9 @@ html, body {
     justify-content: center;
     flex-direction: column;
 }
+.highlight{
+    color: red;
+}
 .generate-columns(4);
 .generate-columns(@n, @i: 1) when (@i =< @n) {
     .multiLine-ellipse-@{i} {

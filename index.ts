@@ -6,6 +6,7 @@
  */
 import './src/common/common';
 import './index';
+import { highlightWords } from './src/util/utils.ts';
 import './src/common/message/message.less';
 import Message from './src/common/message/message.ts';
 import './src/common/pagination/pagination.less';
@@ -89,9 +90,9 @@ window.onload = function(){
                         }
                         currentIndex = -1;
                     });
-                    let span = document.createElement('span');
-                    span.innerText = filteredList[i].plugin_title;
-                    paragraph.appendChild(span);
+                    let p = document.createElement('p');
+                    p.innerHTML = highlightWords(filteredList[i].plugin_title,userInput);
+                    paragraph.appendChild(p);
                     paragraph.addEventListener('click',function(){
                         window.open( `http://localhost:3001/${filteredList[i].plugin_title}.html`);
                     });
@@ -172,8 +173,6 @@ window.onload = function(){
     }
     /* 动态生成插件列表 */
     function addPluginList(pageNumber = 1,perpageCount = perPageCount){
-        console.log(perpageCount)
-
         let pluginListHtml = '';
         for(let i=(pageNumber - 1) * perpageCount;i<(pageNumber * perpageCount);i++){
             pluginListHtml += PluginArr[i] ? `<div class="plugin"><a class="multiLine-ellipse-1" href="http://localhost:3001/${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>` : '';
