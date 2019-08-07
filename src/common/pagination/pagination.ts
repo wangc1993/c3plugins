@@ -1,5 +1,6 @@
 import '../message/message.less';
-import Message from '../message/message.ts';
+import './pagination.less';
+import Message from '../message/message';
 /*每页显示多少插件*/
 const pageArr = [8,12,16,20];
 export default class Pagination {

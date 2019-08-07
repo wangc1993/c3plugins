@@ -4,13 +4,11 @@
  * @Last Modified by:   Carrey Wang
  * @Last Modified time: 2019-07-27 19:59:35
  */
-import './src/common/common';
-import './index';
-import { highlightWords } from './src/util/utils.ts';
-import './src/common/message/message.less';
-import Message from './src/common/message/message.ts';
-import './src/common/pagination/pagination.less';
-import Pagination from './src/common/pagination/pagination.ts';
+import './src/common/common.less';
+import './index.less';
+import { highlightWords } from './src/util/utils';
+import Message from './src/common/message/message';
+import Pagination from './src/common/pagination/pagination';
 /* 所有插件 */
 const PluginArr = [{
     plugin_title: 'turntable'
@@ -90,9 +88,7 @@ window.onload = function(){
                         }
                         currentIndex = -1;
                     });
-                    let p = document.createElement('p');
-                    p.innerHTML = highlightWords(filteredList[i].plugin_title,userInput);
-                    paragraph.appendChild(p);
+                    paragraph.innerHTML = highlightWords(filteredList[i].plugin_title,userInput);
                     paragraph.addEventListener('click',function(){
                         window.open( `http://localhost:3001/${filteredList[i].plugin_title}.html`);
                     });

@@ -1,3 +1,4 @@
+import './message';
 export default class Message {
     message: string;
     type: string;
