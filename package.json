@@ -6,12 +6,14 @@
   "scripts": {
     "webpack": "webpack --config=config/webpack.config.dev.js",
     "start": "node ./scripts/start.js",
+    "build": "node ./scripts/build.js",
     "server": "webpack-dev-server --config=config/webpack.config.dev.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "css-loader": "^3.1.0",
+    "html-webpack-plugin": "^3.2.0",
     "less": "^3.9.0",
     "less-loader": "^5.0.0",
     "style-loader": "^0.23.1",

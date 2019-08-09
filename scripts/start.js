@@ -6,6 +6,7 @@
  */
 
 'use strict';
+process.env.NODE_ENV = 'development';
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const serverConfig = require('../config/webpack.devServerConfig');

@@ -8,7 +8,6 @@
 'use strict';
 const webpack = require('webpack');
 const path = require('path');
-const DevServerConfig = require('./webpack.devServerConfig');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const NODE_ENV = process.env.NODE_ENV;
 /* 配置HTML参数 */
@@ -64,6 +63,13 @@ const pageArr = [{
     _html: 'batteryloading',
     title: '电池loading',
     chunks: ['batteryloading']
+},
+{
+    _html: 'test',
+    title: '测试',
+    chunks: ['test'],
+    /* 后缀名，默认ts */
+    suffix: 'js'
 }
 ];
 
@@ -74,9 +80,9 @@ module.exports = {
     /*出口文件的配置项*/
     output: {
         /*打包的路径*/
-        path: path.resolve(__dirname, '../public'),
+        path: path.resolve(__dirname, '../dist'),
         /*打包的文件名*/
-        filename: '[name].[hash:8].bundle.js'
+        filename: '[name].[hash:8].bundle.js',
     },
     module: {
         rules: [{
@@ -90,7 +96,7 @@ module.exports = {
             }],
             exclude: '/node_modules/'
         }, {
-            test: /\.ts$/,
+            test: /\.(ts|tsx|js)$/,
             use: [{
                 loader: 'ts-loader'
             }]
@@ -101,12 +107,10 @@ module.exports = {
         extensions: ['.ts', '.js', '.less']
     },
     plugins: [],
-    /*配置webpack服务器*/
-    devServer: DevServerConfig
 }
 
 /* 自动生成entry和html模板 */
 pageArr.forEach((page) => {
-    module.exports.entry[page._html] = page._html === 'index' ? `./${page._html}.ts` : `./src/${page._html}/${page._html}.ts`;
+    module.exports.entry[page._html] = page._html === 'index' ? `./${page._html}.ts` : `./src/${page._html}/${page._html}.${page.hasOwnProperty('suffix') ? page.suffix : 'ts'}`;
     module.exports.plugins.push(new htmlWebpackPlugin(getHtmlConfig(page.title, page._html, page.chunks)));
 })

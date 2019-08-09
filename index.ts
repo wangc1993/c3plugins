@@ -1,14 +1,17 @@
 /*
  * @Author: Carrey Wang
- * @Date:   2019-07-26 20:29:21
- * @Last Modified by:   Carrey Wang
- * @Last Modified time: 2019-07-27 19:59:35
+ * @Date: 2019-08-05 12:11:38
+ * @LastEditors: Carrey Wang
+ * @LastEditTime: 2019-08-08 20:44:17
  */
+
 import './src/common/common.less';
-import './index.less';
+import './index.less';  
 import { highlightWords } from './src/util/utils';
 import Message from './src/common/message/message';
 import Pagination from './src/common/pagination/pagination';
+/* 区分prod和dev环境 */
+const BaseUrl = window.location.href.split('index')[0];
 /* 所有插件 */
 const PluginArr = [{
     plugin_title: 'turntable'
@@ -90,7 +93,7 @@ window.onload = function(){
                     });
                     paragraph.innerHTML = highlightWords(filteredList[i].plugin_title,userInput);
                     paragraph.addEventListener('click',function(){
-                        window.open( `http://localhost:3001/${filteredList[i].plugin_title}.html`);
+                        window.open( `${BaseUrl}${filteredList[i].plugin_title}.html`);
                     });
                     fragment.appendChild(paragraph);
                 }
@@ -135,7 +138,7 @@ window.onload = function(){
             PluginArr.filter((item,index) => {
                 if(item.plugin_title === inputDiv.value){
                     jumpBool = true;
-                    window.open( `http://localhost:3001/${inputDiv.value}.html`);
+                    window.open( `${BaseUrl}${inputDiv.value}.html`);
                 }else{
                     if(index === PluginArr.length - 1 && !jumpBool){
                         let message = new Message({
@@ -171,7 +174,7 @@ window.onload = function(){
     function addPluginList(pageNumber = 1,perpageCount = perPageCount){
         let pluginListHtml = '';
         for(let i=(pageNumber - 1) * perpageCount;i<(pageNumber * perpageCount);i++){
-            pluginListHtml += PluginArr[i] ? `<div class="plugin"><a class="multiLine-ellipse-1" href="http://localhost:3001/${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>` : '';
+            pluginListHtml += PluginArr[i] ? `<div class="plugin"><a class="multiLine-ellipse-1" href="${BaseUrl}${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>` : '';
         }
         pluginsDiv.innerHTML = pluginListHtml;
     }
