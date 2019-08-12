@@ -26,6 +26,12 @@
     "webpack-dev-server": "^3.7.2"
   },
   "jest":{
+    "testPathIgnorePatterns": [
+      "node_modules",
+      "scripts",
+      "dist",
+      "public"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",
