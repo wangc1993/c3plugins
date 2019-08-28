@@ -6,7 +6,7 @@
  */
 
 import './src/common/common.less';
-import './index.less';  
+import './index.less';
 import { highlightWords } from './src/util/utils';
 import Message from './src/common/message/message';
 import Pagination from './src/common/pagination/pagination';
@@ -168,10 +168,16 @@ window.onload = function(){
     }
     /* 将当前select的值添加到input中 */
     function selectToInput(){
-        inputDiv.value = searchListDiv.children[currentIndex].firstChild.textContent;
+        //这边使用childNodes而不是children
+        let children = searchListDiv.children[currentIndex].childNodes;
+        let text = '';
+        for(let i = 0; i<children.length; i++){
+            text += children[i].textContent;
+        }
+        inputDiv.value = text;
     }
     /* 动态生成插件列表 */
-    function addPluginList(pageNumber = 1,perpageCount = perPageCount){
+    function addPluginList(pageNumber: number = 1,perpageCount: number = perPageCount){
         let pluginListHtml = '';
         for(let i=(pageNumber - 1) * perpageCount;i<(pageNumber * perpageCount);i++){
             pluginListHtml += PluginArr[i] ? `<div class="plugin"><a class="multiLine-ellipse-1" href="${BaseUrl}${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>` : '';
