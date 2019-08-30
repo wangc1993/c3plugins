@@ -2,7 +2,7 @@
 * @Author: Carrey Wang
 * @Date:   2019-08-27 22:45:42
 * @Last Modified by:   Carrey Wang
-* @Last Modified time: 2019-08-28 21:28:07
+* @Last Modified time: 2019-08-30 21:37:47
 */
 
 'use strict';
@@ -63,6 +63,11 @@ const pageArr = [{
     _html: 'batteryloading',
     title: '电池loading',
     chunks: ['batteryloading']
+},
+{
+    _html: 'textAssertion',
+    title: '文字断言特效',
+    chunks: ['textAssertion']
 },
 {
     _html: 'example',

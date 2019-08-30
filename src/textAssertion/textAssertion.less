@@ -1,0 +1,50 @@
+body {
+    background: linear-gradient(brown, sandybrown);
+    .text {
+        font-size: 2em;
+        font-family: "arial black";
+        position: relative;
+    }
+    /* 利用伪元素增加文字 */
+    .text::before,
+    .text::after {
+        content: attr(data-text);
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: lightyellow;
+    }
+    /* 设置左侧文字的遮罩 */
+    .text::before {
+        clip-path: polygon(0 0, 60% 0, 30% 100%, 0 100%);
+    }
+    /* 设置右侧文字的背景和遮罩 */
+    .text::after {
+        clip-path: polygon(60% 0, 100% 0, 100% 100%, 30% 100%);
+    }
+    /* 当鼠标划过时，遮罩的文字分别向两侧偏移 */
+    .text::before,
+    .text::after {
+        transition: 0.2s;
+    }
+    .text:hover::before {
+        top: -0.05em;
+        left: -0.25em;
+    }
+    .text:hover::after {
+        top: 0.05em;
+        left: 0.25em;
+    }
+    /* 隐藏原始文字 */
+    .text {
+        color: transparent;
+    }
+    /* 两侧文字增加歪斜效果 */
+    .text:hover::before {
+        transform: rotate(-5deg);
+    }
+
+    .text:hover::after {
+        transform: rotate(5deg);
+    }
+}

@@ -11,7 +11,7 @@ import { highlightWords } from './src/util/utils';
 import Message from './src/common/message/message';
 import Pagination from './src/common/pagination/pagination';
 /* 区分prod和dev环境 */
-const BaseUrl = window.location.href.split('index')[0];
+const BaseUrl: string = window.location.href.split('index')[0];
 /* 所有插件 */
 const PluginArr = [{
     plugin_title: 'turntable'
@@ -25,24 +25,26 @@ const PluginArr = [{
     plugin_title: 'glossybutton'
 },{
     plugin_title: 'batteryloading'
+},{
+    plugin_title: 'textAssertion'
 }];
-for(let i=0;i<200;i++){
-    PluginArr.push({plugin_title:`flow${i}`})
-}
+// for(let i : number =0;i<200;i++){
+//     PluginArr.push({plugin_title:`flow${i}`})
+// }
 /* 是否跳转的标志位 */
 let jumpBool : boolean = false;
 /* 避免transition属性在页面加载时就运行一次 */
-window.onload = function(){
-    const inputDiv = document.getElementsByTagName('input')[0];
+window.onload = function() : void{
+    const inputDiv: HTMLInputElement = document.getElementsByTagName('input')[0];
     inputDiv.setAttribute('style','transition: all 0.8s;');
-    const searchDiv = document.getElementsByClassName('search')[0];
+    const searchDiv : Element  = document.getElementsByClassName('search')[0];
     searchDiv.setAttribute('style','transition: all 0.8s;');
     /* 动态生成插件列表 */
-    const pluginsDiv = document.getElementsByClassName('plugins')[0];
+    const pluginsDiv : Element = document.getElementsByClassName('plugins')[0];
     /*每页多少个插件*/
     const perPageCount = 16;
     addPluginList();
-    const searchListDiv = document.getElementsByClassName('search-list')[0];
+    const searchListDiv : Element = document.getElementsByClassName('search-list')[0];
     /* 筛选符合搜索条件的插件 */
     let filteredList = [];
     /* 记录当前的hover索引 */
@@ -51,16 +53,16 @@ window.onload = function(){
     inputDiv.addEventListener('keyup', generatePluginList);
     inputDiv.addEventListener('keydown', selectPlugin);
     inputDiv.addEventListener('blur', hidePluginList);
-    function generatePluginList(event){
+    function generatePluginList(event : any) : void{
         const userInput : string = event.target.value;
         const currentKey: number = event.keyCode;
         /* 符合条件的插件片段，插入文档中 */
-        let fragment = document.createDocumentFragment();
+        let fragment: DocumentFragment = document.createDocumentFragment();
         if(currentKey !== 38 && currentKey !== 40 && currentKey !== 13){
             /* 判断输入框是否有输入 */
             if (userInput.length === 0) {
                 searchListDiv.classList.add('hidden');
-                return false;
+                return;
             }
             /* 有新输入时返回初始值 */
             currentIndex = -1;
@@ -77,7 +79,7 @@ window.onload = function(){
                 fragment.appendChild(paragraph);
             }else{
                 /* 动态增加插件下拉框 */
-                for (let i = 0; i < filteredList.length; i++) {
+                for (let i : number = 0; i < filteredList.length; i++) {
                     let paragraph = document.createElement('p');
                     paragraph.classList.add('search-p');
                     paragraph.addEventListener('mouseover',function(e){
@@ -102,7 +104,7 @@ window.onload = function(){
         }
     }
     /* 通过键盘控制插件的选择 */
-    function selectPlugin(event){
+    function selectPlugin(event : any) : void{
         const currentKey: number = event.keyCode;
         if(currentKey === 38){
             /* 向上键 */
@@ -153,7 +155,7 @@ window.onload = function(){
             jumpBool = false;
         }
     }
-    function hidePluginList(){
+    function hidePluginList() : void{
         /* 清理输入框与隐藏下拉框，定时器是为了让清除操作在页面跳转之后*/
         setTimeout(function(){
             inputDiv.value = '';
@@ -161,34 +163,34 @@ window.onload = function(){
         },100);
     }
     /* 清除元素指定类 */
-    function removeClass(){
-        for(let i=0; i<filteredList.length;i++){
+    function removeClass() : void{
+        for(let i : number =0; i<filteredList.length;i++){
             searchListDiv.children[i].classList.remove('hover');
         }
     }
     /* 将当前select的值添加到input中 */
-    function selectToInput(){
+    function selectToInput() : void{
         //这边使用childNodes而不是children
-        let children = searchListDiv.children[currentIndex].childNodes;
+        let children : NodeListOf<ChildNode> = searchListDiv.children[currentIndex].childNodes;
         let text = '';
-        for(let i = 0; i<children.length; i++){
+        for(let i : number = 0; i<children.length; i++){
             text += children[i].textContent;
         }
         inputDiv.value = text;
     }
     /* 动态生成插件列表 */
-    function addPluginList(pageNumber: number = 1,perpageCount: number = perPageCount){
-        let pluginListHtml = '';
-        for(let i=(pageNumber - 1) * perpageCount;i<(pageNumber * perpageCount);i++){
+    function addPluginList(pageNumber: number = 1,perpageCount: number = perPageCount) : void{
+        let pluginListHtml : string = '';
+        for(let i : number =(pageNumber - 1) * perpageCount;i<(pageNumber * perpageCount);i++){
             pluginListHtml += PluginArr[i] ? `<div class="plugin"><a class="multiLine-ellipse-1" href="${BaseUrl}${PluginArr[i].plugin_title}.html" target="_blank">${PluginArr[i].plugin_title}</a></div>` : '';
         }
         pluginsDiv.innerHTML = pluginListHtml;
     }
-    let pagination = new Pagination({
+    let pagination: any = new Pagination({
         totalCount: PluginArr.length,
         container: '.pagination-div',
         perPageCount,
-        onPageChange: function(data){
+        onPageChange: function(data) : void{
             addPluginList(data.pageNumber,data.perPageCount);
         }
     });
