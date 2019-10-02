@@ -30,7 +30,7 @@ const highlightWords = (str = '', searchText = ''): string => {
             }
             /* 计算当前光标与之前的距离 */
             const step = curHighlightIndex - lastHighlightIndex;
-            /* <=1,只要前面可以匹配后面就不高亮:helo->he1lo（searchText）只高亮he 
+            /* <=1,只要前面可以匹配后面就不高亮:helo->he1lo（searchText）只高亮he
             ** <=2,可以匹配前后高亮在搜索内容中不超过1个字符：helo->he1lo（searchText）高亮helo,helo->he11lo（searchText）高亮he
             */
             /* if (step <= 2 && step >= 0) { */
@@ -60,7 +60,7 @@ const highlightWords = (str = '', searchText = ''): string => {
     }
     return result;
 };
-/* 为目标元素(应该是静态元素)提供移动效果 */
+/* 为目标元素(应该是静态元素、不是动态添加的)提供移动效果 */
 const moveTarget = (ele) => {
     let dv = document.querySelector(ele);
     let x = 0, y = 0, l = 0, t = 0;
@@ -76,7 +76,7 @@ const moveTarget = (ele) => {
         t = dv.offsetTop;
         //开关打开
         moveFlag = true;
-        //设置样式  
+        //设置样式
         dv.style.cursor = 'move';
     })
     /* 鼠标抬起事件 */

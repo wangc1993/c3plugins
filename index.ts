@@ -27,6 +27,10 @@ const PluginArr = [{
     plugin_title: 'batteryloading'
 },{
     plugin_title: 'textAssertion'
+},{
+    plugin_title: 'hotcoffee'
+},{
+    plugin_title: 'concentricMatrix'
 }];
 // for(let i : number =0;i<200;i++){
 //     PluginArr.push({plugin_title:`flow${i}`})

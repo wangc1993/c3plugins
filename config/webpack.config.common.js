@@ -2,7 +2,7 @@
 * @Author: Carrey Wang
 * @Date:   2019-08-27 22:45:42
 * @Last Modified by:   Carrey Wang
-* @Last Modified time: 2019-08-30 21:37:47
+* @Last Modified time: 2019-10-02 20:47:17
 */
 
 'use strict';
@@ -68,6 +68,16 @@ const pageArr = [{
     _html: 'textAssertion',
     title: '文字断言特效',
     chunks: ['textAssertion']
+},
+{
+    _html: 'hotcoffee',
+    title: '热咖啡',
+    chunks: ['hotcoffee']
+},
+{
+    _html: 'concentricMatrix',
+    title: '旋转同心矩阵',
+    chunks: ['concentricMatrix']
 },
 {
     _html: 'example',

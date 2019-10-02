@@ -61,6 +61,7 @@ export default class Pagination {
         paginationHTML += `<div class="goto"><span>跳至</span><input type="number" class="jumpInput" min=1 max=${state.totalPageCount} /><span>页</span><div>`;
         pageContainer.innerHTML = paginationHTML;
         this.bindEvent();
+        this.gotoPage(1);
     }
     bindEvent() {
         let state = this.state;
@@ -103,9 +104,11 @@ export default class Pagination {
             }
         });
         let pageSelect = this.selectorEle('.pageSelect');
+        // 每页大小切换
         pageSelect.addEventListener('change', (e) => {
             state.perPageCount = +e.target.value;
-            this.gotoPage(1);
+            state.totalPageCount = Math.ceil(state.totalCount / (+e.target.value));
+            this.init();
         });
     }
     gotoPage(pageNumber) {
