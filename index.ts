@@ -22,6 +22,8 @@ const PluginArr = [{
 },{
     plugin_title: 'flowborder'
 },{
+    plugin_title: 'textslide2'
+},{
     plugin_title: 'glossybutton'
 },{
     plugin_title: 'batteryloading'
@@ -31,6 +33,12 @@ const PluginArr = [{
     plugin_title: 'hotcoffee'
 },{
     plugin_title: 'concentricMatrix'
+},{
+    plugin_title: 'inverseFilling'
+},{
+    plugin_title: 'signboard'
+},{
+    plugin_title: 'strokeButton'
 }];
 // for(let i : number =0;i<200;i++){
 //     PluginArr.push({plugin_title:`flow${i}`})

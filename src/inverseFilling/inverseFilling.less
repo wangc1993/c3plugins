@@ -1,0 +1,48 @@
+body{
+    background: linear-gradient(to right bottom, gold, chocolate);
+}
+@width: 5em;
+@height: 1.5em;
+@r: @width * 1.2;
+nav{
+    ul{
+        li{
+            font-size: 40px;
+            font-family: sans-serif;
+            list-style-type: none;
+            background-color: white;
+            border: 2px solid black;
+            letter-spacing: 0.1em;
+            width: @width;
+            height: @height;
+            line-height: @height;
+            position: relative;
+            overflow: hidden;
+            margin: 0.5em;
+            &:before{
+                content: '';
+                position: absolute;
+                width: @height;
+                height: @height;
+                background-color: black;
+                border-radius: 50%;
+                top: 0;
+                left: calc(-1 * @height / 2);
+                transition: 0.5s ease-out;
+            }
+            span{
+                color: white;
+                mix-blend-mode: difference;
+            }
+            &:hover{
+                cursor: pointer;
+                &:before{
+                    height: @r;
+                    width: @r;
+                    top: calc(-1 * @r / 2 + @height / 2);
+                    left: calc(-1 * @r / 2 + @width / 2);
+                }
+            }
+        }
+    }
+}

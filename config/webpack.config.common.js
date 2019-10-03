@@ -2,7 +2,7 @@
 * @Author: Carrey Wang
 * @Date:   2019-08-27 22:45:42
 * @Last Modified by:   Carrey Wang
-* @Last Modified time: 2019-10-02 20:47:17
+* @Last Modified time: 2019-10-03 17:12:22
 */
 
 'use strict';
@@ -85,6 +85,27 @@ const pageArr = [{
     chunks: ['example'],
     /* 后缀名，默认ts */
     suffix: 'js'
+},
+{
+    _html: 'textslide2',
+    title: '文本切换2',
+    chunks: ['textslide2']
+},
+{
+    _html: 'inverseFilling',
+    title: '反色填充',
+    chunks: ['inverseFilling']
+},
+{
+    _html: 'signboard',
+    title: '晃动的广告牌',
+    chunks: ['signboard']
+}
+,
+{
+    _html: 'strokeButton',
+    title: '描边按钮',
+    chunks: ['strokeButton']
 }
 ];
 
