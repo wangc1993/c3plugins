@@ -2,7 +2,7 @@
 * @Author: Carrey Wang
 * @Date:   2019-08-27 22:45:42
 * @Last Modified by:   Carrey Wang
-* @Last Modified time: 2019-10-03 17:12:22
+* @Last Modified time: 2019-10-26 21:34:20
 */
 
 'use strict';
@@ -106,6 +106,26 @@ const pageArr = [{
     _html: 'strokeButton',
     title: '描边按钮',
     chunks: ['strokeButton']
+},
+{
+    _html: 'bounceButton',
+    title: '弹起按钮',
+    chunks: ['bounceButton']
+},
+{
+    _html: 'milkWord',
+    title: '牛奶文字',
+    chunks: ['milkWord']
+},
+{
+    _html: 'radar',
+    title: '雷达',
+    chunks: ['radar']
+},
+{
+    _html: 'panda',
+    title: '熊猫',
+    chunks: ['panda']
 }
 ];
 

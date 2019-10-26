@@ -39,6 +39,14 @@ const PluginArr = [{
     plugin_title: 'signboard'
 },{
     plugin_title: 'strokeButton'
+},{
+    plugin_title: 'bounceButton'
+},{
+    plugin_title: 'milkWord'
+},{
+    plugin_title: 'radar'
+},{
+    plugin_title: 'panda'
 }];
 // for(let i : number =0;i<200;i++){
 //     PluginArr.push({plugin_title:`flow${i}`})
