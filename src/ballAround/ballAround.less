@@ -1,0 +1,58 @@
+body{
+    background-color: darkslategray;
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes overlapping {
+  to {
+      z-index: 2;
+  }
+}
+
+.container {
+    position: relative;
+    font-size: 20px;
+    //容器转动起来，制造小球围绕圆环盘旋的效果
+    animation: rotate 5s linear infinite;
+    .ring {
+        position: relative;
+        width: 10em;
+        height: 10em;
+        border: 1.5em solid paleturquoise;
+        border-radius: 50%;
+        z-index: 2;
+    }
+    .sphere {
+        position: absolute;
+        top: -20%;
+        left: -20%;
+        width: 80%;
+        height: 80%;
+        //圆环的左上方画出一个小球
+        &:after {
+            content: '';
+            position: absolute;
+            width: 3em;
+            height: 3em;
+            background-color: lightseagreen;
+            border-radius: 50%;
+        }
+        //让小球在圆环的左上方盘旋
+        //animation: rotate 1.5s linear infinite;
+        //让小球的圆环的上下穿梭
+        animation:
+                rotate 1.5s linear infinite,
+                overlapping 1.5s linear infinite;
+        //通过设置动画延时，制造 3 个小球同时盘旋的效果：
+        &:nth-child(2) {
+            animation-delay: -0.5s;
+        }
+        &:nth-child(3) {
+            animation-delay: -1s;
+        }
+    }
+}

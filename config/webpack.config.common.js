@@ -2,7 +2,7 @@
 * @Author: Carrey Wang
 * @Date:   2019-08-27 22:45:42
 * @Last Modified by:   Carrey Wang
-* @Last Modified time: 2019-10-26 21:34:20
+* @Last Modified time: 2019-11-03 20:55:13
 */
 
 'use strict';
@@ -126,6 +126,21 @@ const pageArr = [{
     _html: 'panda',
     title: '熊猫',
     chunks: ['panda']
+},
+{
+    _html: 'flickeringCandle',
+    title: '摇曳的蜡烛',
+    chunks: ['flickeringCandle']
+},
+{
+    _html: 'ballAround',
+    title: '小球环绕',
+    chunks: ['ballAround']
+},
+{
+    _html: 'turnPage',
+    title: '记事本翻页',
+    chunks: ['turnPage']
 }
 ];
 

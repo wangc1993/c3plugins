@@ -47,6 +47,12 @@ const PluginArr = [{
     plugin_title: 'radar'
 },{
     plugin_title: 'panda'
+},{
+    plugin_title: 'flickeringCandle'
+},{
+    plugin_title: 'ballAround'
+},{
+    plugin_title: 'turnPage'
 }];
 // for(let i : number =0;i<200;i++){
 //     PluginArr.push({plugin_title:`flow${i}`})
