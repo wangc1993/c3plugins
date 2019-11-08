@@ -53,7 +53,9 @@ const PluginArr = [{
     plugin_title: 'ballAround'
 },{
     plugin_title: 'turnPage'
-}];
+},{
+    plugin_title: 'man'
+}]];
 // for(let i : number =0;i<200;i++){
 //     PluginArr.push({plugin_title:`flow${i}`})
 // }

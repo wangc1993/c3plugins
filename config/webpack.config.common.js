@@ -2,7 +2,7 @@
 * @Author: Carrey Wang
 * @Date:   2019-08-27 22:45:42
 * @Last Modified by:   Carrey Wang
-* @Last Modified time: 2019-11-03 20:55:13
+* @Last Modified time: 2019-11-08 22:11:22
 */
 
 'use strict';
@@ -141,6 +141,11 @@ const pageArr = [{
     _html: 'turnPage',
     title: '记事本翻页',
     chunks: ['turnPage']
+},
+{
+    _html: 'man',
+    title: '失落的人',
+    chunks: ['man']
 }
 ];
 
